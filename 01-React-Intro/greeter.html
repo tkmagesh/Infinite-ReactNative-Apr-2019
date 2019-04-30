@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Greeter</title>
+	<script src="react.development.js"></script>
+	<script src="react-dom.development.js"></script>
+	<script src="babel.min.js"></script>
+	<script type="text/babel">
+		class Greeter extends React.Component{
+			//presentation + state + UI Behavior
+
+			state = { 
+				greetMessage : '[A dummy message]',
+				userName : ''
+			} ;
+
+			onBtnGreetClick = () => {
+				this.setState({greetMessage : `Hi ${this.state.userName}, ${this.props.msg}`});
+			}
+
+			onTxtUserNameChange = (evt) => {
+				this.setState({userName : evt.target.value});
+			} 
+
+			onClearMessage = () => {
+				this.setState({ greetMessage : ''});
+			}
+			//presentation
+			render(){
+
+				return(
+					<div>
+						<h1>Greeter</h1>
+						<hr/>
+						<label>User Name :</label>
+						<input type="text" onChange={this.onTxtUserNameChange} />
+						<input type="button" value="Greet" onClick={this.onBtnGreetClick}/>
+						<GreetMessage data={this.state.greetMessage} onClear={this.onClearMessage}/>
+					</div>
+				)
+			}
+		}
+
+		class GreetMessage extends React.Component{
+			render(){
+				return(
+					<div>
+						<span>{this.props.data}</span>
+						<input type="button" value="Clear" onClick={ () => this.props.onClear()}/>
+					</div>
+				)
+			}
+		}
+
+		let greetTemplate = 'Have a good day!'
+		ReactDOM.render(
+			<div>
+				<Greeter msg={greetTemplate} xyz="100" abc="200"/>
+				<hr/>
+				<Greeter msg="Have a wonderful day!" />
+			</div>,
+			document.getElementById('root'));
+	</script>
+</head>
+<body>
+	<div id="root">
+		
+	</div>
+</body>
+</html>
