@@ -13,4 +13,8 @@ const images = {
   Thunder: require('../assets/thunder.png'),
 };
 
+/*export default function(weather){
+  return images[weather];
+}*/
+
 export default weather => images[weather];

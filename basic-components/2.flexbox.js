@@ -81,11 +81,11 @@ export default class Toggle extends Component {
 
     return (
       <TouchableOpacity
-        style={[styles.option, option === value && styles.activeOption]}
+        style={[toggleStyles.option, option === value && toggleStyles.activeOption]}
         onPress={this.onPress.bind(this, option)}
         key={i}
       >
-        <Text style={styles.text}>
+        <Text style={toggleStyles.text}>
           {option}
         </Text>
       </TouchableOpacity>
@@ -96,11 +96,11 @@ export default class Toggle extends Component {
     const {label, options} = this.props
 
     return (
-      <View style={styles.container}>
-        <Text style={[styles.text, styles.label]}>
+      <View style={toggleStyles.container}>
+        <Text style={[toggleStyles.text, toggleStyles.label]}>
           {label}
         </Text>
-        <View style={styles.optionsContainer}>
+        <View style={toggleStyles.optionsContainer}>
           {options.map(this.renderOption)}
         </View>
       </View>
@@ -108,7 +108,7 @@ export default class Toggle extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const toggleStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     paddingBottom: 20,

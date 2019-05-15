@@ -1,0 +1,5 @@
+modify the SearchInput to display error messages
+	1. hardcode the error message in the component itself
+	2. accept the error message as props
+
+	3. make sure that the error messsage is cleared as soon as the user starts typing

@@ -1,0 +1,53 @@
+Salary Calculator
+
+Basic, HRA, DA, Tax %
+Salary = (Basic + HRA + DA) * ((100-tax)/100)
+
+Salary Calculator
+Basic :
+TextBox
+
+HRA:
+TextBox
+
+DA:
+TextBox
+
+Tax
+TextBox
+
+Calculate Button
+
+Salary
+
+
+Implementation choices
+=======================
+1. do the calculation in the component itself
+2. import the model and create instance in the SalaryCalculator.js
+3. import the model and create instance in App.js and pass the instance as props to the SalaryCalculator
+
+
+SalaryCalculatorModel.js
+=========================
+export default class SalaryCalculatorModel{
+	basic = 0;
+	hra = 0;
+	da = 0;
+	tax = 0;
+	salary = 0;
+
+	calculate(){
+		let gross = this.basic+ this.hra + this.da;
+		let net = gross * ((100-this.tax)/100);
+		this.salary = net;
+	}
+}
+
+App.js
+import SalaryCalculatorModel
+create an instance
+pass it as props to SalaryCalculator
+
+If the salary > 10000 display in green or display in red
+
