@@ -42,7 +42,7 @@
 				return(
 					<div>
 						<label>Delta : </label>
-						<input type="number" onChange={ evt => this.setState({delta : parseInt(evt.target.value)})}/>
+						<input type="number" onChange={ evt => this.setState({delta : parseInt(evt.target.value) || 0 })}/>
 						<br/>
 						<input type="button" value="Decrement" onClick={this.onDecrementClick}/>
 						<span> [ {value} ] </span>
