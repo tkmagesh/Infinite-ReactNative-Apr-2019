@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>State Manager Demo</title>
+	<script src="state-manager.js"></script>
+	<script src="react.development.js"></script>
+	<script src="react-dom.development.js"></script>
+	<script src="babel.min.js"></script>
+	<script type="text/babel">
+		var INC = 'INCREMENT',
+			DEC = 'DECREMENT';
+
+		//action -> { type : action-name, payload : supporting-data }
+
+		function numberReducer(currentState = 0, action){
+
+			if (action.type === INC) return currentState + action.payload;
+			if (action.type === DEC) return currentState - action.payload;
+			return currentState;
+		}
+
+		var store = SM.createStore(numberReducer)
+
+
+		class Number extends React.Component{
+			state = {
+				delta : 0
+			};
+
+			onDecrementClick = () => {
+				let dec_action = { type : DEC, payload : this.state.delta };
+				this.props.store.dispatch(dec_action)
+			}
+			onIncrementClick = () => {
+				let inc_action = { type : INC, payload : this.state.delta };
+				this.props.store.dispatch(inc_action)
+			}
+			render(){
+				let { store } = this.props,
+					value = store.getState()
+				return(
+					<div>
+						<label>Delta : </label>
+						<input type="number" onChange={ evt => this.setState({delta : parseInt(evt.target.value)})}/>
+						<br/>
+						<input type="button" value="Decrement" onClick={this.onDecrementClick}/>
+						<span> [ {value} ] </span>
+						<input type="button" value="Increment" onClick={this.onIncrementClick}/>
+					</div>
+				)
+			}
+		}
+
+		function renderApp(){
+			ReactDOM.render(<Number store={store}/>, document.getElementById('root'));
+		}
+		renderApp();
+		store.subscribe(renderApp);
+	</script>
+</head>
+<body>
+
+	<div id="root"></div>
+</body>
+</html>
